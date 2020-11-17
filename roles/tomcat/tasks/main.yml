@@ -1,0 +1,32 @@
+---
+# tasks file for tomcat
+#
+# This task depends on the installation of package "tomcat" to 
+# perform a comprehensive install including user, group, passwords, etc. 
+# 
+
+- name: install tomcat
+  package:
+    name: "{{ tomcat }}"
+    state: latest
+  register: tomcat_pkg_status
+
+- name: create tomcat home directory
+  file: 
+    path: "{{ tomcat_content_dir }}"
+    state: directory
+  register: tomcat_dir_status
+  when: tomcat_pkg_status.rc == 0
+
+- name: copy static index.html to tomcat home directory
+  template:
+    src: index.html.j2
+    dest: "{{ tomcat_content_dir }}/index.html"
+    mode: 0644
+  when: tomcat_dir_status.rc == 0
+  notify: tomcat service restart
+
+- name: tomcat service start
+  service:
+    name: tomcat
+    state: started

@@ -1,0 +1,4 @@
+---
+# vars file for postgres on RedHat-7
+
+postgresql_data_dir: "/var/lib/pgsql/data"

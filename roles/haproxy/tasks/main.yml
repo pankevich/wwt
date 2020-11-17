@@ -1,0 +1,21 @@
+---
+# tasks file for haproxy
+#
+- name: Install haproxy
+  package: 
+    name: "{{ haproxy_pkg }}"
+    state: latest
+  register: haproxy_pkg_status
+
+- name: Configure haproxy
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    mode: 0644
+  when: haproxy_pkg_status.rc == 0
+  notify: haproxy service restart
+
+- name: haproxy service start
+  service: 
+    name: "haproxy"
+    state: started

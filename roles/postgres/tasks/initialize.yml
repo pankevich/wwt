@@ -1,0 +1,11 @@
+---
+# Initialize postresql database
+
+- name: Check if postgresql data dir exists.
+  stat:
+    path: "{{ postgresql_data_dir }}/PG_VERSION"
+  register: pgdata_dir_version
+
+- name: Ensure postgresqs database is initialized.
+  command: postgresql-setup initdb
+  when: not pgdata_dir_version.stat.exists

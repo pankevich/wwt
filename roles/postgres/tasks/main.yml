@@ -1,0 +1,6 @@
+---
+# tasks file for postgres
+
+- include_tasks: variables.yml
+- include_tasks: install.yml
+- include_tasks: initialize.yml

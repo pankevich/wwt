@@ -1,0 +1,5 @@
+---
+# vars file for haproxy
+
+loadbalancer_port: "80"
+haproxy_pkg: "haproxy"

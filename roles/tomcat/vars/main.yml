@@ -1,0 +1,6 @@
+---
+# vars file for tomcat
+
+tomcat_pkg: "tomcat"
+tomcat_port: "8080"
+tomcat_content_dir: "/usr/share/tomcat/webapps/ROOT"

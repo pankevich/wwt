@@ -1,0 +1,10 @@
+---
+# Variable configuration.
+# For this exercise, only RedHat 6, 7, and 8-based servers 
+# have been configured. To configure other OSs, appropriate
+# yml files need to be created in ../vars/ directory.
+
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when:
+  - ansible_os_family == 'RedHat'

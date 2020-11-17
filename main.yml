@@ -1,0 +1,17 @@
+---
+# Deploy haproxy onto frontends.
+# Deploy tomcat onto apps.
+# Deploy postgres onto appsdbs
+#
+
+- hosts: apps
+  roles: 
+    - role: tomcat
+
+- hosts: frontends
+  roles:
+    - role: haproxy
+
+- hosts: appdbs
+  roles:
+    - role: postgres
